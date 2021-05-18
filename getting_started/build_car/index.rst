@@ -48,4 +48,4 @@ There are three main sections to the car.
    autonomy_elements
    upper_level_chassis
    all_together
-	 additional_components
+   additional_components
