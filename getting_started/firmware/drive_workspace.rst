@@ -1,76 +1,76 @@
 .. _doc_drive_workspace:
 
-3. ROS Workspace Setup
+3. ROS Workspace 설정하기
 =====================
-**Equipment Required:**
-	* Fully built F1TENTH  vehicle
-	* Pit/Host computer OR
-	* External monitor/display, HDMI cable, keyboard, mouse
+**필요한 장치:**
+	* 완성된 F1TENTH 차량
+	* Pit/Host 컴퓨터
+	* 외부 monitor/display, HDMI 케이블, 키보드, 마우스
 
-**Approximate Time Investment:** 1.5 hour
+**걸리는 시간:** 1.5 시간
 
-Overview
+개요
 ----------
-We use ROS to connect everything together and ultimately run the car. We'll need to set up the :ref:`ROS workspace <ros_workspace>`, set up some :ref:`udev rules <udev_rules>`, and :ref:`test the lidar connection <lidar_setup>`. Everything in this section is done on the **Jetson NX** so you will need to connect to it via SSH from the **Pit** laptop or plug in the monitor, keyboard, and mouse.
+궁극적으로 차량을 운행하기 위해서 모든 연결에 ROS를 사용한다. :ref:`ROS workspace <ros_workspace>`, :ref:`udev rules <udev_rules>`와 :ref:`lidar 연결 테스트 <lidar_setup>` 을 설정한다. 여기서는 모든 것을 **Jetson NX**에서 수행하며 **Pit** 노트북에서 SSH로 연결한다.
 
 .. _ros_workspace:
 
-1. Setting Up the ROS Workspace
+1. ROS Workspace 설정하기
 ---------------------------------
-Connect to the **Jetson NX** either via SSH on the **Pit** laptop or a wired connection (monitor, keyboard, mouse).
+**Jetson NX**에 SSH나 **Pit** 노트북 아니면 모니터와 키보드로 연결가능하다.
 
-On the **Jetson NX**, setup your ROS workspace (for the driver nodes onboard the vehicle) by opening a terminal window and following these steps.
+**Jetson NX**에서 터미널 윈도우를 열어서 ROS workspace를 설정하고 아래 단계를 따라하자.
 
-#. Clone the following repository into a folder on your computer.
+#. 다음 저장소를 clone한다.
 
 	.. code-block:: bash
 
-		$​ ​cd​ ~/sandbox (or whatever folder you want to work ​in​)
+		$​ ​cd​ ~/sandbox (원하는 폴더)
 		$​ git ​clone​ https://github.com/f1tenth/f1tenth_system
 
-#. Create a workspace folder if you haven’t already, here called ``f1tenth_ws``, and copy the ``f1tenth_system`` folder into it.
+#.  여기서는 ``f1tenth_ws``라는 workspace 폴더를 생성한다. 그리고 ``f1tenth_system`` 폴더를 여기로 복사한다.
 
 	.. code-block:: bash
 
 		$​ mkdir -p f1tenth_ws/src
 		$​ cp -r f1tenth_system f1tenth_ws/src/
 
-#. You might need to install some additional ROS packages.
+#. 추가 ROS 패키지 설치하기
 
-	For ROS Kinetic:
+	ROS Kinetic:
 
 		.. code-block:: bash
 
 			$​ sudo apt-get update
 			$​ sudo apt-get install ros-kinetic-driver-base
 
-	For ROS Melodic:
+	ROS Melodic:
 
 		.. code-block:: bash
 
 			$​ sudo apt-get update
 			$​ sudo apt-get install ros-melodic-driver-base
 
-#. Make all the Python scripts executable.
+#. 모든 python 스크립트를 실행가능하게 설정
 
 	.. code-block:: bash
 
 		$​ ​cd​ f1tenth_ws
 		$​ find . -name “*.py” -exec chmod +x {} \;
 
-#. Move to your workspace folder and compile the code (catkin_make does more than code compilation - see online reference).
+#. workspace 폴더로 이동하고 코드를 컴파일한다.(catkin_make은 단순히 코드를 컴파일하는 것 이상의 일을 수행한다. 온라인 문서 참고)
 
 	.. code-block:: bash
 
 		$​ catkin_make
 
-#. Finally, source your working directory into your shell using
+#. 마지막으로 shell에서 working directory를 참조할 수 있도록 source 명령 수행한다.
 
 	.. code-block:: bash
 
 		$​ source devel/setup.bash
 
-Congratulations! Your onboard driver workspace is all set up.
+이제 완료! onboard driver workspace이 모두 설정되었다.
 
 ..
 	Workspace Content Breakdown

@@ -1,9 +1,9 @@
 .. _doc_firmware_hokuyo10:
 
-2. Hokuyo 10LX Ethernet Connection Setup
+2. Hokuyo 10LX 이더넷 연결 설정
 ==========================================
 .. note::
-	If you have a 30LX or a LIDAR that connects via USB, you can skip this section.
+	30LX처럼 USB를 사용하는 경우 이 과정은 넘어가자.
 
 **Equipment Required:**
 	* Fully built F1TENTH vehicle with a Hokuyo 10LX lidar
