@@ -1,35 +1,35 @@
 .. _doc_build_car_firmware:
 
-Install F1TENTH Software
+F1TENTH Software 설치
 =======================
-.. note:: This section assumes that you have already completed :ref:`Building the Car <doc_build_car>` and :ref:`System Configuration <doc_software_setup>`.
+.. note:: :ref:`Building the Car <doc_build_car>` 와 :ref:`System Configuration <doc_software_setup>` 는 이미 완료했다고 가정한다.
 
-At the end of this section, you will have the VESC tuned and the lidar connection completed.
+이 섹션을 통해 VESC 튜닝과 lidar 연결이 완료된다.
 
-**Required Equipment:**
-	* Fully built F1TENTH vehicle
-	* (see each section for more required equipment)
+**필요 장치:**
+	* 완성된 F1TENTH 차량
+	* (각 섹션별로 필요 장치 확인)
 
-**Difficulty Level:** Intermediate-Advanced
+**난이도:** 중고급
 
-**Approximate Time Investment:** 1.5 hour
+**소요시간:** 1.5 시간
 
-With the physical car is built and the system configuration setup, we can start to install the firmware needed on the car.
+물리적으로 차량과 시스템 설정이 완료되고 난 후에 차량에 필요한 펌웨어를 설치할 수 있다.
 
-There are two subsections here. You will need to :ref:`Configure the VESC <doc_firmware_vesc>` but you can skip the :ref:`Hokuyo Ethernet Connection <doc_firmware_hokuyo10>` section if you have a lidar (e.g. Hokuyo 30LX) that is connected via USB instead.
+2개 서브 섹션이 있다. :ref:`VESC 설정하기 <doc_firmware_vesc>` 와 lidar 연결하기(Hokuyo 30LX인 경우 USB이므로 skip가능)
 
 .. toctree::
    :maxdepth: 1
-   :name: Firmware Setup
+   :name: Firmware 설정
    :hidden:
 
    firmware_vesc
    firmware_hokuyo10
    drive_workspace
 
-#. :ref:`Configuring the VESC <doc_firmware_vesc>` goes over how to set up and tune the VESC.
-#. :ref:`Hokuyo 10LX Ethernet Connection Setup <doc_firmware_hokuyo10>` details how to set up the connection on the Jetson NX.
-#. :ref:`Workspace Setup <doc_drive_workspace>` goes over how to setup the workspace needed to connect all the components on the vehicle.
+#. :ref:`VESC 설정하기 <doc_firmware_vesc>` VESC 설정과 튜닝하기
+#. :ref:`Hokuyo 10LX 이더넷 연결 설정 <doc_firmware_hokuyo10>`  Jetson NX에 연결하기
+#. :ref:`Workspace Setup <doc_drive_workspace>` workspace 설정 및 차량에 필요한 모든 컴포넌트 연결하기
 
 .. tip::
-  If you have any build and/or setup questions, post to the `forum <http://f1tenth.org/forum.html>`_.
+  질문은 `forum <http://f1tenth.org/forum.html>`_ 참조

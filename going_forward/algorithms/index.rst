@@ -3,7 +3,7 @@
 Algorithms
 ============
 
-Here are just a handful of algorithms that we've implemented. Feel free to create your own!
+우리가 구현한 간단한 알고리즘을 보여준다. 여러분꺼 알아서 구현하삼!
 
 .. toctree::
    :maxdepth: 1

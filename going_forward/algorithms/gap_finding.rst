@@ -1,65 +1,65 @@
 .. _doc_gap_finding:
 
 
-Gap-finding in LiDAR Scans
+LiDAR 스캔을 통한 Gap 찾기
 ======================================
 
-..note:: This section requies a computer/laptop running Ubuntu Xenial 16.04/ROS Kinetic or Bionic 18.04/ROS Melodic.
+..note:: Ubunu 18.04/ROS Melodic이 실행되는 컴퓨터가 필요하다.
 
-The topic on which lidar information messages are published is the ``/scan`` topic. If you run the :ref:`simulator <doc_going_forward_simulation>` and run ``$rostopic info /scan​``, you will see the messages are of type ``std_msgs/LaserScan``.
+lidar 정보 메시지 topic은 ``/scan`` 이다. :ref:`simulator <doc_going_forward_simulation>` 와 ``$rostopic info /scan​`` 을 실행하면 ``std_msgs/LaserScan`` 타입의 메시지를 볼 수 있다.
 
 Scan Matching Odometry 
 ------------------------------------------------------
-ROS’ ​laser_scan_matcher​ package performs scan matching odometry.
+ROS’ ​laser_scan_matcher​ 패키지가 scan matching odometry를 수행한다.
 
-Installing Packages
+패키지 설치하기
 ------------------------
-Open a terminal and run the following commands to instal the required packages.
+터미널 열어서 필요한 패키지를 설치하기 위해서 아래 명령을 수행한다.
 
 .. code-block:: bash
 
 	$ sudo apt-get install ros-kinetic-amcl
 	$ sudo apt-get install ros-kinetic-scan-tools
 
-Getting the Example Launch File
+예제 Launch 파일 가져오기
 ---------------------------------------
-The f110 repo contains a launch file that demonstrates running the laser_scan_matcher on pre-recorded bag data. Copy it into your workspace’s ``src/`` folder, e.g.
+f110 저장소는 미리 저장된(pre-recorded) bag 데이터에서 laser_scan_matcher를 실행되는 것을 보여주기 위한 launch 파일을 포함하고 있다. 여러분의 workspace의 ``src/`` 폴더에 이것을 복사한다.
 
 .. code-block:: bash
 
 	$​ cp -r f110-course-upenn/algorithms/localization src/
 
-This folder defines a package, ​localization, which uses ROS’ ​``laser_scan_matcher`` package.
+이 폴더는 ROS의 ​``laser_scan_matcher`` 패키지를 사용하는 localization 패키지를 정의한다.
 
-Re-source your ``setup.bash``, and you should be able to run
+``setup.bash`` 를 다시 source하면 실행이 가능하다.
 
 .. code-block:: bash
 
 	$​ rospack find localization
 
-The majority of the parameters in the ​``laser_scan_matcher​node`` are taken from the ROS docs on the ​​``laser_scan_matcher`` package, available `here​ <https://wiki.ros.org/laser_scan_matcher#Parameters>`_.
+​``laser_scan_matcher​node``에 있는 파라미터의 대부분은 ``laser_scan_matcher`` 패키지에 있는 ROS docs에서 가져오며 `here​ <https://wiki.ros.org/laser_scan_matcher#Parameters>`_ 를 참고하자.
 
-In order to run the ``laser_scan_matcher​`` on the pre-recorded bag file, execute the following lines in your terminal.
+미리 저장한 bag 파일에서 ``laser_scan_matcher​`` 를 실행하기 위해서 터미널에서 다음을 실행한다.
 
 .. code-block:: bash
 
 	$ roslaunch localization laser_scan_matcher.launch
 
-If you don’t want to see RViz, change the ``use_rviz`` arg in the launch file to ``“false”``. The rostopic printing the pose of the car and covariance matrix is called​ ``/pose_with_covariance_stamped``. You can read about it online.
+RViz를 보지 않으려면 launch 파일에 있는 ``use_rviz`` 을 ``“false”`` 로 설정한다. 차량의 pose를 출력하는 rostopic과 covariance matrix는 ``/pose_with_covariance_stamped`` 라고 부른다. 관련 자료에서 웹에서 찾아보자.
 
 Localization
 --------------
-Now that we have information from the lidar, we can start to localize the car.
+lidar로부터 정보를 가지고 차량의 localize 를 시작할 수 있다.
 
-Localization with Hector SLAM
+Hector SLAM으로 Localization
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-We use Hector SLAM in order to generate a map given a bag file. First install ``hector-slam``.
+bag 파일로부터 map을 생성하기 위해서 Hector SLAM를 사용한다. 먼저 ``hector-slam`` 를 설치한다.
 
 .. code-block:: bash
 
 	$​ sudo apt-get install ros-kinetic-hector-slam
 
-Run these following commands in order to reproduce it on your machine.
+다시 생성하기 위해서 다음 명령을 실행한다.
 
 .. code-block:: bash
 

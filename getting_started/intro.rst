@@ -1,25 +1,24 @@
 .. _doc_build_intro:
 
 
-Introduction
+소개
 ==================
 
-Here is where you will find all the information needed to get started and join the F1TENTH community! This build documentation is divided into four sequential sections, each one building on the other:
+시작에 필요한 모든 정보를 여기서 찾을 수 있다. 만들기 문서를 4개 섹션으로 나뉘며 다음과 같다. :
 
-#. :ref:`Building the F1TENTH Car <doc_build_car>` - Start here if you are building the car from scratch.
-#. :ref:`Configure F1TENTH System <doc_software_setup>`- Start here if you have completed building the car.
-#. :ref:`Install F1TENTH Software Stack <doc_build_car_firmware>` - Start here if you've already done 1 and 2 above.
-#. :ref:`Drive the F1TENTH Car <doc_drive>` - Start here if you have everything set up from the previous three sections and are ready to learn how to set up a workspace on the vehicle and start driving!
+#. :ref:`Building the F1TENTH Car <doc_build_car>` - 차량을 처음부터 만들려면 여기서부터 시작
+#. :ref:`Configure F1TENTH System <doc_software_setup>`- 완성된 차량을 가지고 있다면 여기서부터 시작
+#. :ref:`Install F1TENTH Software Stack <doc_build_car_firmware>` - 위에 1, 2를 완성했다면 여기서부터 시작
+#. :ref:`Drive the F1TENTH Car <doc_drive>` - 위에 3가지가 완료된 경우 workspace를 설정하고 운전을 시작할 수 있다!
 
-**Difficulty Level:** Intermediate-Advanced
+**난이도:** 중고급
 
-**Overall Approximate Time Investment:** 10-15 hours
+**소요시간:** 10-15 시간
 
-You might want to plan on saving an entire day to work on this project if you going through this Getting Started section from beginning to end.
+시작하기 섹션을 처음부터 끝까지 해보면 이 프로젝트에 드는 시간을 줄이는데 도움이 된다.
 
 
-
-The building of the F1TENTH car was recorded and be watched here:
+F1TENTH 차량 만들기 영상은 여기 참고:
 
 .. raw:: html
 
@@ -27,8 +26,7 @@ The building of the F1TENTH car was recorded and be watched here:
 
 
 .. important::
-  | If you have any build and/or setup questions, post to the `forum <http://f1tenth.org/forum.html>`_.
-  | If you have questions/suggestions for this documentation, `submit an issue <https://github.com/f1tenth/f1tenth_doc/issues>`_ on github.
+  | 질문이으면 `forum <http://f1tenth.org/forum.html>`_ 참고.
 
 .. image:: img/carbuild.gif
 	:align: center

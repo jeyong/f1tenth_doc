@@ -7,19 +7,19 @@ FAQ
 ==========================
 This will be updated as we get new questions. Please post questions in the forum. Answers to common problems will be compiled here.
 
-General
+일반
 ----------------
-Where can I find additional working examples of autonomous control code?
+추가적인 자동제어 코드 예제는 어디에 있나요?
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Please see this `repository <https://github.com/f1tenth/F110CPSWeek2018>`_ of past competitors submissions.
+과거 참가자가 제출한 코드는 `repository <https://github.com/f1tenth/F110CPSWeek2018>`_ 를 참고하자.
 
-Mechanical
+기구
 ----------------
-Do I have a broken drive train? How can I fix it?
+drive train이 무서지면 고칠 수 있나요?
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Remove the rear housing on the vehicle’s differential. There is only a single screw securing it.
+나사를 풀어서 차량의 rear 하우징을 제거한다.
 
-Once the housing is removed confirm that the spur gear on the motor output shaft is in contact and properly meshed with the slipper clutch gear.
+일단 하우징을 제거하면 모터 출력 샤프트에 있는 spur gear가 slipper clutch gear와 연결되어 meshed되어 있다.
 
 If the gears are not properly meshed, loosen the screw located in the slot of the motor housing so that the output shafts position may be adjusted. Once the gears are again properly meshed hold the assembly in place and secure the loosened screw. The gears should be meshed where they're just touching and not slipping. Do not force the two gears together such that they're exerting too much pressure on each other.
 
@@ -27,17 +27,17 @@ Before putting the cover back on test the system by rolling the car back and for
 
 When you are finished place the cover back on the gearbox assembly and secure it. You need to slide one side in between the motor and the edge of the car first.
 
-Differential makes excessive noise
+단차에 의한 소음 발생(Differential makes excessive noise)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Use the ​Lock, Rock, and Roll​ method shown in `this video <https://youtu.be/C2iw9A7O_xk>`_ to adjust the pressure on the slipper clutch​.
+slipper clutch에 압력을 조정하여 `this video <https://youtu.be/C2iw9A7O_xk>`_ 에서 Lock, Rock, Roll method를 사용한다.
 
-I’m not able to steer the car, no response from the steering servo
+차량을 조정할 수 없고 스티어링 서보에서 응답이 없는 경우
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Double check that the servo wires are properly and securely connected. Be careful about the polarity of the three pin connectors. Confirm that you built the servo_out firmware for the VESC as shown `here <firmware/firmware_vesc.html#updating-the-firmware-on-the-vesc>`_.
 
-System identification failure and VESC tuning
+시스템 ID 실패 및 VESC 튜닝
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-First check that you have the correct firmware and hardware version installed.
+먼저 제대로 된 펌웨어와 하드웨어 버전이 설치되었는지 확인한다.
 
 Second check that you have properly updated the parameters for system identification in the FOC tab. See the image in the VESC tuning/setup instruction section `here <firmware/firmware_vesc.html#detecting-and-calculating-motor-parameters>`_.
 
@@ -71,13 +71,13 @@ In these cases, it is possible and recommended to use a bluetooth gamepad like t
 
 Software
 ----------------
-LIDAR variants
+LIDAR 변경
 ^^^^^^^^^^^^^^^^
-If you are using the Hokuyo 10LX please confirm that you properly configured the wired network connection as described :ref:`here <doc_firmware_hokuyo10>`.
+Hokuyo 10LX를 사용하는 경우 유선 네트워크를 제대로 설정해야만 한다. :ref:`here <doc_firmware_hokuyo10>`.
 
-Installing pyTorch
+pyTorch 설치하기
 ^^^^^^^^^^^^^^^^^^^
-The installation for pyTorch has been streamlined with the help with pre-built binaries. You can find instructions `here <https://forums.developer.nvidia.com/t/pytorch-for-jetson-nano-version-1-4-0-now-available/72048>`_.
+pyTorch 설치는 미리 설치된 바이너리로 가능하다. `here <https://forums.developer.nvidia.com/t/pytorch-for-jetson-nano-version-1-4-0-now-available/72048>`_ 참고.
 
 .. #. Make sure that you system path includes CUDNN
 
@@ -157,7 +157,7 @@ The installation for pyTorch has been streamlined with the help with pre-built b
 .. * `https://github.com/dusty-nv/jetson-reinforcement <https://github.com/dusty-nv/jetson-reinforcement>`_
 .. * `https://github.com/andrewadare/jetson-tx2-pytorch <https://github.com/andrewadare/jetson-tx2-pytorch>`_
 
-Installing Tensorflow
+Tensorflow 설치하기
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 First double check which Jetpack version and which CUDA version you have installed on your Jetson NX. You should be able to determine the Jetpack version from the GUI that you used when flashing your board. If you are unsure of the CUDA version open a terminal and inspect the results of nvcc --version.
 
@@ -176,12 +176,12 @@ Recording video from sensors like the Zed camera on the Jetson NX can be slow. T
 
 Kernel
 ----------------
-USB doesn’t work
+USB가 동작하지 않는 경우
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-If you are using the Jetson TX2 you need to build the board support package for the Orbitty carrier. See :ref:`here <doc_software_jetson>`.
+Jetson TX2를 사용하는 경우 Orbitty carrer를 위한 보드 지원 패키지를 빌드해야한다. :ref:`here <doc_software_jetson>` 참고.
 
-USB works, but LIDAR and VESC do not work
+USB는 동작하지만 LIDAR와 VESC가 동작하지 않는 경우
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-First check that you are opening the correct device. It is highly recommended that you :ref:`setup udev rules <udev_rules>`.
+먼저 장치를 열기가 제대로 되었는지 확인. :ref:`setup udev rules <udev_rules>` 를 추천한다.
 
-If this fails to work then there is a strong chance that you need to install the ttyACM module. For a convenient installer visit `here <https://github.com/jetsonhacks/installACMModule>`_.
+동작이 되지 않으면 ttyACM module 설치가 필요하다. 간편 설치를 위해서 `here <https://github.com/jetsonhacks/installACMModule>`_ 를 방문하자.
