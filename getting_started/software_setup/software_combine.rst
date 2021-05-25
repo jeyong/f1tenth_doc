@@ -1,16 +1,16 @@
 .. _doc_software_combine:
 
-3. Connecting the Pit/Host and the NVIDIA Jetson NX
+3. Pit/Host와 NVIDIA Jetson NX 연결하기
 =======================================
-**Equipment Used:**
-	* Pit/Host laptop/computer running Ubuntu 16.04 or 18.04
-	* Fully built F1TENTH vehicle with its NVIDIA Jetson NX connected to a keyboard, mouse, and an external monitor/display via HDMI cable
-	* Wireless router (or wireless hotspot on your phone)
-	* Ethernet cable (needed if Pit/Host laptop does not have WiFi capability)
+**사용한 장비:**
+	* Ubuntu 18.04이 실행되는 Pit/Host 노트북/컴퓨터
+	* 완성된 F1TENTH 차량에 NVIDIA Jetson NX에 키보드, 마우스, 외부 모니터 연결
+	* WiFi
+	* 이더넷 케이블 (WiFi 안되는 경우)
 
-**Approximate Time Investment:** 1 hour
+**소요시간:** 1 시간
 
-Overview
+개요
 ----------
 We could log into the Jetson using a monitor, keyboard, and mouse, but what about when we’re driving the car? Fortunately, the Jetson has WiFi capability and can be accessed remotely via an SSH session. Throughout this tutorial, you will be asked to configure the Jetson’s and your laptop’s network settings. Make sure to get these right! Using the wrong IP address may lead to conflicts with another classmate, meaning neither of you will be able to connect.
 
@@ -33,14 +33,14 @@ If you have a NVIDIA Jetson NX, it comes with a network card onboard. Make sure 
 If you have a Nano/Xavier NX, or a Xavier, you'll need to install a M.2 network card from Intel to enable wireless networking.
 
 
-2. Wireless Hot Spot on the NVIDIA Jetson NX
+1. NVIDIA Jetson NX에 무선 Hot Spot
 ---------------------------------
-**Equipment Used:**
-	* Fully built F1TENTH vehicle
-	* Pit/Host Laptop OR
-	* External monitor/display, HDMI cable, keyboard, mouse
+**사용한 장치:**
+	* 완성된 F1TENTH 차량
+	* Pit/Host 노트북 혹은
+	* 외부 모니터, HDMI 케이블, 키보드, 마우스
 
-**Approximate Time Investment:** 30 minutes
+**소요 시간:** 30 minutes
 
 As you begin to test on larger tracks, you may find a need to have a direct connection to your car, so as to not have to rely on the car being within a certain distance of your router. The solution here is to set up wireless hot spot on the NVIDIA Jetson NX.
 
@@ -61,17 +61,17 @@ Under General click on “Automatically connect to this network when available�
 On your phone, tablet, or laptop you can now connect directly to this Hotspot, and ssh into it. The default IP address for Hotspot on the Jetson is 10.42.0.1.
 
 
-3. Connecting the NVIDIA Jetson NX to WiFi
+1. NVIDIA Jetson NX을 WiFi에 연결하기
 -------------------------------------------------
-Connect the NVIDIA Jetson NX to ``F1TENTH_WIFI`` by clicking on wireless icon on top-right corner of Ubuntu Desktop and selecting ``F1TENTH_WIFI``. This is done on the NVIDIA Jetson NX with the monitor, keyboard, and mouse connected to it and not the Pit/Host laptop. It might take a while for the NVIDIA Jetson NX to discover the wireless network.
+NVIDIA Jetson NX을 ``F1TENTH_WIFI`` 에 연결하기. NVIDIA Jetson NX을 모니터, 키보드, 마우스 연결해서 처리. 
 
-After you're connected to the wireless network, open a terminal and type:
+무선 네트워크에 연결된 후에 터미널 열어서 입력:
 
 .. code-block:: bash
 
 	$ ifconfig
 
-You should see something similar to this:
+아래와 같이 보인다.:
 
 .. code-block:: bash
 
@@ -115,20 +115,20 @@ You should see something similar to this:
 	$         TX packets 1262  bytes 196668 (196.6 KB)
 	$         TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
 
-You should be able to find your car's assigned IP address under :code:`wlan0`, then after ``inet``. In this example, the IP address is ``195.0.0.5``.
+차량에 할당된 IP를 :code:`wlan0` 에서 볼 수 있다. 여기서 IP는 ``195.0.0.5`` 로 되어 있다.
 
-4. Connecting the Pit/Host Computer to WiFi
+1. Pit/Host 컴퓨터를 WiFi로 연결하기
 -------------------------------------------------
 Now, on the Pit/Host laptop, connect to the same wireless network, ``F1TENTH_WIFI`` and find its IP Address. If your laptop running Linux or macOS, you could use the same :code:`ifconfig` command in the terminal. On macOS, it may be under ``en0`` or ``en1``. In this example, the IP address of the Pit is ``192.168.1.151``.
 
 If you’re running Linux on the Pit laptop in a virtual machine (VM), connect the Pit  computer to the router. Depending on which VM software you have and the default VM configuration, you may also need to set its network adapter configuration to NAT mode. This ensures your VM will share the wireless connection with your host OS instead of controlling the adapter itself.
 
-5. Connecting to the Pit/Host to the NVIDIA Jetson NX
+1. Pit/Host를 NVIDIA Jetson NX에 연결하기
 -------------------------------------------
 Now that the car and the laptop are on the same network, you should check that you can ping the laptop from the car and you can ping the car from the laptop.
 
-| On the NVIDIA Jetson NX, open a terminal and type: :code:`ping 192.168.1.151` (This is the IP address of the Pit computer.).
-| On the Pit computer, open a terminal and type :code:`ping 195.0.0.5` (This is the IP address of the NVIDIA Jetson NX).
+| the NVIDIA Jetson NX에서, 터미널 열어서 입력: :code:`ping 192.168.1.151` (Pit 컴퓨터의 IP 주소).
+| Pit computer에서 터미널 열어서 입력 :code:`ping 195.0.0.5` (NVIDIA Jetson NX의 IP 주소).
 
 Remember to replace the IP addresses in the two lines above with your specific addresses.
 

@@ -1,28 +1,26 @@
 .. _doc_software_advance:
 
-Advanced Setups
+고급 설정
 ===================
-The following two sections are optional.
+다음 2개 섹션은 옵션이다.
 
-* :ref:`Wireless Hot Spot on the NVIDIA Jetson NX <jetson_wireless>` is relevant if you want to test on larger tracks and need to have a direct connection to your vehicle.
-* :ref:`VNC Server on the NVIDIA Jetson NX <jetson_wireless>` is useful if you're running mapping and localization algorithms, you’ll need to see RViz and use its tools for some applications.
+* :ref:`Wireless Hot Spot on the NVIDIA Jetson NX <jetson_wireless>` 넓은 트랙에서 테스트하고 싶으면 차량에 직접 연결해야한다.
+* :ref:`VNC Server on the NVIDIA Jetson NX <jetson_wireless>` mapping과 localization 알고리즘을 실행하는 경우 유용. RViz를 보고 이런 도구를 잘 사용하는게 중요하다.
 
  .. _jetson_wireless:
 
-Wireless Hot Spot on the NVIDIA Jetson NX
+ NVIDIA Jetson NX에서 무선 WiFi
 ---------------------------------
-**Equipment Used:**
-	* Fully built F1TENTH vehicle
-	* Pit/Host Laptop OR
-	* External monitor/display, HDMI cable, keyboard, mouse
+**사용 장치:**
+	* 완성된 F1TENTH 차량
+	* Pit/Host 노트북 혹은
+	* 외부 모니터, HDMI 케이블, 키보드, 마우스
 
-**Approximate Time Investment:** 30 minutes
+**소요시간:** 30 분
 
-As you begin to test on larger tracks, you may find a need to have a direct connection to your car, so as to not have to rely on the car being within a certain distance of your router. The solution here is to set up wireless hot spot on the NVIDIA Jetson NX.
+더 넓은 트랙에서 테스트할려면 차량에 직접 연결의 필요성을 느끼게 된다. 솔루션은 NVIDIA Jetson NX에 hot spot을 설정한다.
 
-Connect to the **NVIDIA Jetson NX** via SSH on the **Pit** laptop or via a monitor, keyboard, and mouse.
-
-On the NVIDIA Jetson NX, go to System Settings > Network.
+**Pit**에서 SSH를 사용해서 **NVIDIA Jetson NX**에 연결한다. 아니면 **NVIDIA Jetson NX**에 키보드, 마우스를 연결해서 사용할 수 있으며 시스템 Settings > Network에서 가능하다.
 
 .. image:: img/combine/wireless1.jpg
 
@@ -38,43 +36,42 @@ On your phone, tablet, or laptop you can now connect directly to this Hotspot, a
 
  .. _jetson_vnc:
 
-VNC Server on the NVIDIA Jetson NX
+NVIDIA Jetson NX에서 VNC Server
 -------------------------
 **Equipment Used:**
-	* Fully built F1TENTH vehicle
-	* Pit/Host Laptop OR
-	* External monitor/display, HDMI cable, keyboard, mouse
+	* 완성된 F1TENTH 차량
+	* Pit/Host 노트북 혹은
+	* 외부 모니터, HDMI 케이블, 키보드, 마우스
 
-**Approximate Time Investment:** 1 hour
+**소요시간:** 1 시간
 
-When you start running mapping and localization algorithms, you'll need to see RViz and use its tools for some applications, meaning that you'll need a GUI interface for the remote desktop.
+mapping와 localization 알고리즘을 구동되기 시작할 때, RViz를 보고 도구를 사용해야한다. 즉 원격 데스크탑을 위한 GUI 인터페이스가 필요하다.
 
-Setting up a VNC server on the Jetson allows you to control the Jetson remotely. Why is this beneficial? When the car is running in the real world we won’t be able to connect the Jetson to an HDMI display. The traditional solution has been to ssh into the Jetson to see the directories, but what if we want to see graphical programs such as Rviz? (in order to see laser scans in live time and camera feeds). Or what if we want to be able to see multiple terminal windows open on the Jetson? A VNC server does this trick.
+Jetson에서 VNC server를 설정하는 것은 원격으로 Jetson을 제어할 수 있다. 장점은 무엇인가? 차량이 실제 world에서 운행되면 Jetson을 HDMI로 연결할 수 없다. 고전적인 방법은 디렉토리를 보기 위해서 Jetson에 ssh를 사용하는 것이지만 Rviz와 같은 그래픽 프로그램을 볼려면 어떻게 해야하나? (실시간으로 laser scan을 보려면) Jetson에서 여러 터미널 창을 띄워보고 싶다면? VNC 서버가 이런 것을 가능하게 해준다.
 
-#. Install XIIVNC
+#. XIIVNC 설치
 
 	.. code-block:: bash
 
 		sudo apt install x11vnc
-#. Create a password file
+#. password 파일 생성
 
 	.. code-block:: bash
 
 		echo mypassword > /home/nvidia/.vnc/password
 
-	Change this to your own password. You might have to create the .vnc directory
-#. Press windows/command/super key and search for ‘startup applications’. Create a new startup command, give it a name, and the command is:
+	원하는 password로 변경. .vnc 디렉토리를 생성해야만 할 수도 있다.
+#. windows/command/super 키를 누르고 ‘startup applications’ 를 검색한다. 새로운 startup 명령을 생성하고 이름을 주기 위해서 다음 명령을 수행:
 
 	.. code-block:: bash
 
 		/usr/bin/x11vnc -auth guess -forever -loop -noxdamage -repeat -passwdfile /home/nvidia/.vnc/password -rfbport 5900 -shared
-#. Restart the Jetson, and the vnc server should be running after you restart.
-#. In your favorite VNC client (Ubuntu has Remmina installed by default, and VNC Viewer is available across most platforms), connect to your car's IP with port number 5900 to see the remote desktop. Note that the resolution of the car when it was booted without a monitor plugged in is low, you can plug in the HDMI Emulator included in the BOM or a working monitor to fix that.
+#. Jetson을 재시작. vnc server는 재시작 후에 실행해야만 한다.
+#. 원하는 VNC client(Ubuntu는 기본적으로 Remmina 설치되어 있고 VNC Viewer는 대부분 플랫폼에서 사용 가능)에서 port 5900으로 차량 IP에 연결해서 원격 데스트탑을 볼 수 있다.
 
 .. note::
-  We've had spotty experience with NVIDIA Jetson NX's network card, the hotspot sometimes just doesn't work. If your NVIDIA Jetson NX's network card is faulty, you can use a USB wifi dongle and use your network through the dongle instead of the NVIDIA Jetson NX network card.
+  NVIDIA Jetson NX의 네트워크 카드를 사용해 본 바로 hotspot은 가끔 동작하지 않는다. 만약 NVIDIA Jetsn NX의 네트워크 카드에 문제가 있다면 USB wifi 동글을 대신 사용하자.
 
-Good work on making it through the advanced section!
 
 .. image:: img/combine/wireless4.gif
 	:align: center

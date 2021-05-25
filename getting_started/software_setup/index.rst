@@ -1,49 +1,49 @@
 .. _doc_software_setup:
 
-Configure F1TENTH System
+F1TENTH 시스템 설정
 ========================
-.. note:: This section assumes that you have already completed :ref:`Building the Car <doc_build_car>`.
+.. note::  :ref:`Building the Car <doc_build_car>` 완료
 
-At the end of this section, you will have the NVIDIA Jetson NX and host laptop set up.
+이 섹션에서는 NVIDIA Jetson NX와 host 컴퓨터 설정을 다룬다.
 
-**Required Equipment:**
-	* Fully built F1TENTH vehicle
-	* Laptop/computer
-	* External monitor/display
+**필요 장치:**
+	* 완성된 F1TENTH 차량
+	* 노트북/컴퓨터
+	* 모니터
 	* HDMI cable
-	* Keyboard
-	* Mouse
-	* Wireless router (or your phone as a wireless hotspot)
-	* Ethernet cable (needed if Pit/Host laptop does not have WiFi capability)
+	* 키보드
+	* 마우스
+	* WiFi
+	* 이더넷 케이블(Pit/Host 컴퓨터가 WiFi가 안되는 경우)
 
-**Difficulty Level:** Intermediate-Advanced
+**난이도:** 중고급
 
-**Approximate Time Investment:** 2-3 hours
+**소요시간:** 2-3 시간
 
-Now that you have a working physical F1TENTH car, you'll want to program it to do something useful, otherwise it's just a glorified and expensive car model at this point.
+F1TENTH 차량을 실제로 동작시키고 나면 차량에 프로그래밍을 해서 뭔가 유용한 일을 하고 싶어진다.
 
-This **Configure F1TENTH System** section will walk you through how to configure the NVIDIA Jetson NX so that you will be able to run programs on the F1TENTH Autonomous Vehicle System and communicate with the Vehicle.
+**Configure F1TENTH System** 섹션은 NVIDIA Jetson NX을 설정한다. 프로그램을 F1TENTH Autonomous 차량 시스템에 프로그램하고 차량과 통신한다.
 
-The image below represents the flow of information on the F1TENTH Autonomous Vehicle System.
+아래 이미지는 F1TENTH Autonomous 차량 시스템에 정보의 흐름을 나타낸다.
 
 .. figure:: img/f1tenth_sys_flow_NEW.png
   	:align: center
 
-	Flow of information on the F1TENTH Autonomous Vehicle System.
+	F1TENTH Autonomous 차량 시스템의 정보 흐름.
 
-The **NVIDIA Jetson NX** is the main brain of the entire system. It gives commands to the **VESC** which controls the **Servo** and the **Brushless Motor** on the F1TENTH Vehicle. The **NVIDIA Jetson NX** also receives information from the **Lidar** either via USB or Ethernet. The **Pit/Host** laptop is where we can connect remotely via **SSH** to the **NVIDIA Jetson NX**.
+**NVIDIA Jetson NX**는 전체 시스템의 중요 brain이다. F1TENTH 차량에 **Servo** 와 **Brushless Motor** 를 제어하는 **VESC** 에 명령을 전달한다. **NVIDIA Jetson NX** 는 USB나 이더넷을 통해서 **Lidar**로부터 정보를 수신한다. **Pit/Host** 노트북은 **NVIDIA Jetson NX** 에 **SSH** 를 통해서 원격으로 연결할 수 있다.
 
-This section has five subsections:
+5개 세브섹션:
 
-#. :ref:`Pit/Host setup <doc_software_host>` details how to install ROS and the simulators on the **Pit/Host** computer/laptop.
-#. :ref:`Configuring the NVIDIA Jetson NX <doc_optional_software_nx>` contains all necessary steps to configure the **NVIDIA Jetson Xavier NX**.
-#. :ref:`Combine setup <doc_software_combine>` goes over how to set up a wireless communication system between the **Pit/Host** laptop and the **NVIDIA Jetson NX** once you have already completed the above two sections.
-#. :ref:`DEPRECATED - Configuring the TX2 <doc_software_jetson>` contains all necessary steps to configure the **NVIDIA Jetson TX2**.
+#. :ref:`Pit/Host setup <doc_software_host>` ROS와 시뮬레이션 설치 방법(**Pit/Host** 와 컴퓨터)
+#. :ref:`Configuring the NVIDIA Jetson NX <doc_optional_software_nx>` **NVIDIA Jetson Xavier NX** 를 설정하기 위한 필요한 단계를 포함
+#. :ref:`Combine setup <doc_software_combine>` **Pit/Host** 컴퓨터와 **NVIDIA Jetson NX** 사이에 무선통신 시스템을 설정하는 방법. 위 2개 섹션은 완료한 상태여야 한다.
+#. :ref:`DEPRECATED - Configuring the TX2 <doc_software_jetson>` **NVIDIA Jetson TX2** 를 설정하기 위한 모든 필요한 단계들을 포함한다.
 
 .. tip::
-  If you have any build and/or setup questions, post to the `forum <http://f1tenth.org/forum.html>`_.
+  질문은 `forum <http://f1tenth.org/forum.html>`_ 참고.
 
-Many thanks to `Dr. Rosa Zheng <http://www.lehigh.edu/~yrz218/>`_ from Lehigh University for compiling the majority of information in this section.
+이 섹션의 대부분의 내용은 `Dr. Rosa Zheng <http://www.lehigh.edu/~yrz218/>`_ 가 수행하였다.
 
 .. toctree::
    :maxdepth: 1

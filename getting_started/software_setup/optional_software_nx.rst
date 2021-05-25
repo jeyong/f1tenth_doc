@@ -1,44 +1,44 @@
 .. _doc_optional_software_nx:
 
-2. Configuring the NVIDIA Jetson NX
+1. NVIDIA Jetson NX 설정
 =========================================
 
-**Equipment Used:**
+**사용한 장치:**
 
-* Pit/Host laptop/computer running any Operating System
-* Fully-built F1TENTH vehicle
+* OS를 실행하는 Pit/Host 랩탑/컴퓨터
+* 완성된 F1TENTH 차량
 * microSD card (16GB minimum)
-* USB micro cable (must have both data and power wires)
-* microSD card reader/writer for Pit/Host PC
+* USB micro 케이블 (데이터와 전원공급)
+* microSD card 리더기(Pit/Host PC)
 * SD card image burning software (e.g. Balena Etcher)
-* Terminal emulation software (e.g. PuTTy, screen, miniterm.py, etc.)
+* 터미널 에뮬레이션 SW (e.g. PuTTy, screen, miniterm.py, etc.)
 
-**Approximate Time Investment:** 1-2 hours
+**소요시간:** 1-2 시간
 
-1. Flash Jetson NX with Software
+1. Jetson NX에 flash
 ---------------------------
-The setup of the Nvidia Jetson NX is easy and convenient. NVIDIA themselves provide a detailed step-by-step getting started on how to bring the NVIDIA Jetpack Software on the NVIDIA Jetson NX. You can either follow this documentation `here <https://developer.nvidia.com/embedded/learn/get-started-jetson-xavier-nx-devkit>`_ or follow our step-by-step introduction below.
+Nvidia Jetson NX의 설정은 쉽고 편하다. NVIDIA Jetpack Software을 NVIDIA Jetson NX에 넣는 방법을 보여준다. `here <https://developer.nvidia.com/embedded/learn/get-started-jetson-xavier-nx-devkit>`_ 
 
-1. Go to the NVIDIA Develoeprs Download Center at https://developer.nvidia.com/downloads and click Jetson.
+1. NVIDIA Developers Download Center https://developer.nvidia.com/downloads 로 가서 Jetson을 클릭한다.
 
         .. figure:: img/nx/nx-software-step1.png
                 :align: center
 
                 NVIDIA Developers Download Center
 
-2. Under SD Card Image Method, click Jetson Xavier NX Developer Kit.
+2. SD Card Image 방식, Jetson Xavier NX Developer Kit 클릭.
 
         .. figure:: img/nx/nx-software-step2.png
                 :align: center
 
-                Jetson Xavier NX Developer Kit downloads.
+                Jetson Xavier NX Developer Kit 다운로드.
 
-3. The next page will require you to log in with an **NVIDIA Developer Program login**. If you do not have one, click Join Now - Registration is free. If you already have an account, click Login.
+3. 다음 페이지는 **NVIDIA Developer Program login** 에서 로그인이 필요하다. 등록하지 않았다면 Join Now를 클릭한다. 계정을 가지고 있으면 Login을 클릭한다.
 
         .. figure:: img/nx/nx-software-step3.png
                 :align: center
 
-                NVIDIA Developer Program login page.
+                NVIDIA Developer Program login 페이지.
 
 4. Once you have logged in, you will be redirected to your profile settings page. At the top of this page, you should see a banner with a button with the text "Jetson Xavier NX Developer Kit SD Card Image." Click this button.
 
@@ -65,7 +65,7 @@ The setup of the Nvidia Jetson NX is easy and convenient. NVIDIA themselves prov
 
                 File selection window.
 
-9. For the "target" device, choose the microSD card in the microSD card reader/writer.
+9.  For the "target" device, choose the microSD card in the microSD card reader/writer.
 
         .. figure:: img/nx/nx-software-step9.png
                 :align: center
