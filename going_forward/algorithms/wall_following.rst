@@ -1,34 +1,35 @@
 .. _doc_wall_following:
 
 
-Wall Following
+벽 따라가기(Wall Following)
 ================
 
-..note:: This section requies a computer/laptop running Ubuntu Xenial 16.04/ROS Kinetic or Bionic 18.04/ROS Melodic.
+..note:: 이 섹션은 Ubuntu 18.04와 ROS Melodic이 필요하다.
 
-With our Hokuyo lidar sensor attached to the car, one of the simplest algorithms we can run is a wall following algorithm. The basic idea is that the car uses the lidar sensor to measure the distance to either the left wall, right wall, or both walls, and tries to maintain a certain distance from the wall. Inside the wall_following package under ``/launch`` you will see a file called ``wall_following.launch``.
+Hokuyo lidar 센서를 차량에 부착하고 가장 간단한 알고리즘 중에 하나로 벽 따라가기 알고리즘을 수행한다. 기본 아이디어는 차량은 왼쪽이나 오른쪽 벽 혹은 양쪽벽에 대한 거리를 측정하는 lidar 센서를 사용한다는 것이다. 벽으로부터 특정 거리를 유지한다. ``/launch`` 아래에 wall_following 패키지 내부에는 ``wall_following.launch`` 라는 파일을 볼 수 있다.
 
-Run the following commands in terminal in order to see the robot do a simple left wall follow in Gazebo simulator.
+터미널에서 다음 명령을 실행하면 Gazebo 시뮬레이터에서 왼쪽 벽을 따라가는 로봇을 볼 수 있다.
 
-In one terminal run:
+첫번째 터미널에서 실행:
 
 .. code-block:: bash
 
 	$​ roscore
 
-In a second terminal, run:
+두번째 터미널에서 실행:
 
 .. code-block:: bash
 
 	$​ ​source​ devel/setup.bash
 	$​ roslaunch wall_following wall_following.launch
 
-Now you should see the Gazebo simulator load with the car placed at the origin in our Levine Building 2nd floor world. The car tries to maintain a certain distance of 0.5 meters from the left all, and will continue following it around left turns in a counter-clockwise fashion. How is the code organized? From a high level view, data passes in this order:
+Gazebo 시뮬레이터는 Levine Building 2nd floor의 원점에 차량을 위치시키면서 실행되는 것을 볼 수 있다. 차량은 왼쪽으로부터 0.5 m의 거리를 유지하고 반시계 방향으로 왼쪽 턴을 하면서 following한다. 코드는 어떻게 구성되어 있을까? 높은 관점에서 이 순서로 데이터가 처리된다.:
 ``pid_error.py -> control.py -> sim_connector.py``
 
-The main code for the wall_following is under ``wall_following/scripts/pid_error.py``. In this script you will find methods for ``followLeft``, ``followRight``, and ``followCenter``. 
+wall_following 에 대한 메인 코드는 ``wall_following/scripts/pid_error.py`` 아래에 있다. 이 script에서 ``followLeft``, ``followRight``, ``followCenter`` 를 위한 method를 찾을 수 있다.
 
-* ``Pid_error.py`` subscribes to the laser scan ``/scan`` topic and calls the callback function each time it gets new lidar data (around 40 times per second). It uses PID to calculate the error and adjusts the steering angle accordingly in order to try to keep its desired trajectory a certain distance away from the wall. ``Pid_error.py`` then outputs over the ``/error`` topic a message type we custom defined called pid_input which contains pid_vel and pid_error. 
+* ``Pid_error.py`` 는 laser scan ``/scan`` topic을 subscribe하고 새로운 lidar 데이터를 받을때마다 callback 함수를 호출한다.(초당 40회 정도) PID를 사용한다. 
+ subscribes to the laser scan ``/scan`` topic and calls the callback function each time it gets new lidar data (around 40 times per second). It uses PID to calculate the error and adjusts the steering angle accordingly in order to try to keep its desired trajectory a certain distance away from the wall. ``Pid_error.py`` then outputs over the ``/error`` topic a message type we custom defined called pid_input which contains pid_vel and pid_error. 
  
 * ``Control.py`` subscribes to the ``/error`` topic and limits the car’s turning angle to 30 degrees and slows down the car when it is making a turn, or speeds up the car when it is going straight. ``Control.py`` publishes to the ``/drive_parameters`` topic using our custom message type called drive_param which contains velocity and angle. 
 

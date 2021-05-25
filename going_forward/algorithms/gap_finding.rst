@@ -65,107 +65,107 @@ bag 파일로부터 map을 생성하기 위해서 Hector SLAM를 사용한다. �
 
 	$​ roslaunch localization hector_slam.launch
 
-You will see an Rviz window open up that maps out the Moore Building 2nd floor loop. The launch file reads in a bag file which recorded all of the topics. Hector SLAM only needs the ``/scan`` topic (which contains the laser scans) in order to simultaneously map and localize. Note that no odometry data is used, whereas more advanced mapping packages such as Google Cartographer have the option to use odometry data and even IMU data.
+Rviz 윈도우가 떠서 Moore Building 2층 지도가 나타난다. launch 파일은 모든 topic들이 저장된 bag 파일을 읽어온다. Hector SLAM은 map과 localize를 동시에 하기 위해서  ``/scan`` topic만 필요로 한다.(laser scan을 포함) 어떤 odometry 데이터도 사용하지 않았지만 Google Cartographer와 같은 고급 패키지는 odometry 데이터와 IMU 데이터까지도 옵션으로 사용한다.
 
-Once the map is completely generated, in a new terminal window run the following in order to save the map as a yaml. The last string after “-f” is the name of the map you’d like to save. Since in this case we are using the Moore Building bag file, we appropriately name the map “moore”.
+일단 map이 완전히 생성되면 새로운 터미널에서 yaml으로 map을 저장하기 위해서 following을 수행한다. “-f” 이후 마지막 문자열은 저장할 map의 이름이다. 이 경우 Moore Building bag 파일을 사용하므로 map 이름은 “moore”가 적절한다.
 
 .. code-block:: bash
 
 	$​ rosrun map_server map_saver -f moore
 
-Now you will see in your home directory a ``levine.yaml`` file and a ``moore.pgm`` file. You will need both of these. We have already copied and pasted a version of this under ``localization/localization/maps/moore.yaml``, as well as its corresponding ``moore.pgm`` file.
+이제 홈디렉토리에 ``levine.yaml`` 파일과 ``moore.pgm`` 파일이 있다. 나중에 이 2개 모두 필요하게 된다. ``localization/localization/maps/moore.yaml`` 아래에 ``moore.pgm`` 파일 뿐만 아니라 버전을 복사 및 붙여넣기한다. 
 
-Now that you have Hector SLAM working, we can dive a bit more into the details of the ``hector_slam.launch`` file. At the top of the file you will see that we set the parameter ``/use_sim_time`` to true because the launch file plays a bag file. In this case, it’s a bag file recorded while the car did a single loop around Moore. Whenever we play bag files, it’s important to include the --clock argument because it causes ROS to play bag files with simulated time synchronized to the bag messages (more information `here <https://answers.ros.org/question/12577/when-should-i-need-clock-parameter-on-rosbag-play/%E2%80%8B>`_).
+이제 Hector SLAM이 동작한다. ``hector_slam.launch`` 파일에 대해서 좀더 상세히 알아보자. 파일의 맨 상단에 ``/use_sim_time`` 가 true로 되어 있는 것을 볼 수 있다. 왜냐하면 launch 파일은 bag 파일을 play하기 때문이다. 이 경우 차량이 Moore 주위를 한 번 도는 동안 bag 파일을 저장한다. bag 파일을 play할 때마다 --clock 인자를 포함하는 것이 중요한데 그 이유는 ROS가 bag 메시지에 대해서 동기화 되어 bag 파일을 play되기 때문이다. (추가 정보는 `here <https://answers.ros.org/question/12577/when-should-i-need-clock-parameter-on-rosbag-play/%E2%80%8B>`_ 참고)
 
-After the rosbag play instruction in the ``hector_slam.launch`` file, you will notice that there is a ``tf2_ros`` transform node that transforms between ``base_link`` to laser. This is very important to include or else Hector SLAM will not know where the laser is relative to the center of gravity of the car. In this case we use a static transform since the laser does not move relative to the car.
+rosbag이 ``hector_slam.launch`` 파일에 있는 instruction을 play하고 난 이후에 ``tf2_ros`` transform node가 있다는 것을 알게 되낟. ``tf2_ros`` 는 ``base_link`` 와 laser 사이에서 transform된다. include하는 것은 아주 중요한데 그렇지 않으면 Hector SLAM은 laser가 차량의 무게 중심에서 어느 위치에 있는지 알지 못한다. 이 경우 static transform을 사용하여 laser는 차량의 상대 위치로 이동하지 않는다.
 
-After the ``tf2_ros`` transform instruction in the launch file, you will see a reference to the ``hector_mapping mapping_default.launch`` file with parameters that specify the names of the ``base_frame``, ``odom_frame``, ``map_size``, ``scan_topic``, etc. Then there is a ``hector_geotiff`` which is used to save the map as a Geotiff file. Lastly, we launch rviz with a specific ``rviz_cfg`` (Rviz configuration) so that we don’t have to select all the topics we want to visualize every time weopen up Rviz. As a special note of interest, in algorithms below if you see in the launch file that there is a --delay of a few seconds added to Rviz, the reason is probably that we need to give Rviz time for certain nodes that generally take longer to publish to start publishing, otherwise Rviz will get old data.
+launch 파일에서 ``tf2_ros`` 변한 명령 이후에, ``base_frame``, ``odom_frame``, ``map_size``, ``scan_topic`` 등의 이름을 지정하는 파라미터를 가지는 ``hector_mapping mapping_default.launch`` 파일에 대한 참조를 볼 수 있다. 다음으로 map을 Geotiff 파일로 저장하는데 사용하는 ``hector_geotiff`` 이 있다. 마지막으로 ``rviz_cfg`` 를 인자로 rviz를 실행한다. 매번 시각화를 위해 모든 topic을 선택할 필요는 없다. 아래 알고리즘에서 Rviz에 추가된 몇 초 지연이 있는 launch 파일은, publishing을 시작하면서 시간이 걸리는 특정 node에 대해서 Rviz time을 주기 때문이다. 그렇게 안하면 Rviz는 old data를 가지게 된다.
 
-If your hector_slam.launch isn’t working correctly, a good way to debug is to compare your ``rqt_graph`` and ``rqt_tf_tree`` to the ones we have screenshotted below.
+hector_slam.launch 파일이 제대로 동작하지 않는 경우 디버깅하는 좋은 방법은 ``rqt_graph`` 와 ``rqt_tf_tree`` 를 비교해 보는 것이다.
 
 
 .. figure:: img/hectorslam1.jpg
 	:align: center
 
-Rqt_graph for Hector SLAM generated by running “rosrun rqt_graph rqt_graph”
+“rosrun rqt_graph rqt_graph” 실행해서 생성된 Hector SLAM을 위한 Rqt_graph
 
 .. figure:: img/hectorslam2.jpg
 	:align: center
 
-Rqt_tf_tree generated for Hector SLAM by running “rosrun rqt_tf_tree rqt_tf_tree”
+“rosrun rqt_tf_tree rqt_tf_tree” 실행해서 Hector SLAM을 위해 생성한 Rqt_tf_tree
 
 
 Localization with AMCL (Adaptive Monte Carlo Localization)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Now that we have generated our map, the next step is to be able to localize the car within the map. Now you may ask, if we already did SLAM, then why don’t we use Hector SLAM to simultaneously localize and map each time this is run? The reason is that Hector SLAM is computationally intensive, and we don’t wish to generate a new map each time we run the car. Since we assume the world does not change (after all, walls do not break down very often), we only want to localize the car within the fixed world. In order to localize the car, we use an algorithm called AMCL (Adaptive Monte Carlo Localization).
+map을 생성하고 다음 단계로 map 내부에서 차량을 localize 할 수 있다. 이런 질문이 있을 수 있다. 'SLAM을 이미 했는데 Hector SLAM을 이용해서 매번 동시에 localize와 map을 할 수 있지 않나?' Hector SLAM은 계산량이 많아서 매번 새로운 map을 생성하기를 원치 않는다. world는 변화가 없다는 가정하므로(wall은 자주 허물어지지 않는다.) 고정된 world 내부에서 차량을 localize하기만 하면 된다. 차량을 localize 하기 위해서 AMCL 이라는 알고리즘을 사용한다.
 
-First install amcl for ROS.
+먼저 ROS용 amcl을 설치한다.
 
 .. code-block:: bash
 
 	$ sudo apt-get install ros-kinetic-amc1
 
-Next, run the launch file for amcl we have created. Note that we do not want roscore running because amcl will create its own ROS master. If we have two ROS masters there will probably be interference problems and hence AMCL will not run correctly.
+다음으로 amcl을 위해 생성한 launch 파일을 실행한다. amcl은 자신의 ROS master를 생성하므로 roscore를 실행되기를 원치 않는다. 2개 ROS master를 가지게 된다면 간섭이 생기고 따라서 AMCL은 제대로 동작하지 않게 된다.
 
 .. code-block:: bash
 
 	$​ roslaunch localization amcl.launch
 
-You should see Rviz open up after a delay of 5 seconds (which we purposely set in order to make sure everything is loaded, specifically the map server). Then, you will see the map appear and the car moving through the map with green particles around it. In Rviz, on the top center click on 2D Pose Estimate, then click and drag on where the car starts. It is important to set the initial pose because if we don’t then the car will start at the origin and its localization will be wrong. In the moore.yaml map, the car starts at the bottom center T-shaped crossroads, facing to the left. The car will do clockwise loop back to its original location.
+5초 지연 후에 Rviz가 화면에 나타난다.(모든게 load되도록 하는(특히 map 서버) 지연 시간을 설정한다.) 다음으로 map이 나타나고 녹색 입자의 map을 통해 차량이 움직인다. Rviz에서 상단 가운데 2D Pose Estimate 클릭하고 차량이 시작할 위치로 클릭해서 드래그 시킨다. 초기 pose를 설정하는 것은 중요하다. 왜냐하면 차량이 원점에서 시작하고 localiztion은 잘못된 값이 되기 때문이다. moore.yaml map에서 차량은 바닥 중앙에 T-shaped crossroad에서 왼쪽을 바라보면서 시작된다. 차량은 원래 위치에서 반시계 방향으로 돌게 된다.
 
 .. figure:: img/amcl1.jpg
 	:align: center
 
-Setting an initial 2D pose estimate for AMCL. Top bar, fourth button. Then click and drag in the map.
+AMCL을 위해서 초기 2D pose estimate를 설정한다. 상단 바의 4번째 버튼. 다음으로 map에서 클릭해서 드래그 시킨다.
 
-In the end, you should see a path that looks something like this image below. It won’t be perfect because `AMCL <http://wiki.ros.org/amcl%E2%80%8B>`_ requires a ``/tf`` (transform) topic. The best way we have to generate the ``/tf`` is to use the ``/vesc/odom`` topic, which literally counts the number of wheel spins and degree turns in order to estimate odometry. VESC odometry is not the most accurate because errors accumulate over time, but it gives a good general direction that guides AMCL with a general location for our car. We then used a messagetotf node in order to convert the ``/vesc/odom`` into ``/tf`` so that it can be used by AMCL.
+결국 아래 이미지와 같은 path를 보게 된다. `AMCL <http://wiki.ros.org/amcl%E2%80%8B>`_ 은 ``/tf`` (transform) topic을 필요로 하기 때문에 완벽하지 않다. ``/tf`` 를 생성해야만 하는 최고의 방법은 ``/vesc/odom`` topic을 사용하는 것이다. 이것은 글자 그대로 휠 회전 수와 각도를 카운트해서 odometry를 추정하낟. VESC odometry는 아주 정확하지는 않은데 왜냐하면 에러가 시간에 따라서 누적되기 때문이다. 하지만 차량을 위한 일반 location으로 AMCL을 가이드하기에는 충분히 괜찮다. ``/vesc/odom`` ``/tf`` 로 변환하기 위해서 messagetotf node를 사용했고 이는 AMCL에서 사용된다.
 
-Now that you have AMCL working successfully, time for some details on what’s going behind the scenes in the ``amcl.launch`` file. Like when we ran Hector SLAM, since we are playing this off of a bag file we need to set the ``/use_sim_time parameter`` to true. We also load a ``map_server`` node in order to publish the moore.yaml map. Note that we include the same ``base_link_to_laser`` transform as the one we provided Hector SLAM. After that line in the launch file is loading the amcl node, where we kept all the numerical parameters the same and only modified the ``base_frame_id`` and added initial pose x, y, and a. A is the orientation of the car relative to the map frame. You can read more on these in the `AMCL page <http://wiki.ros.org/amcl%E2%80%8B>`_ for information on each parameter.
+이제 AMCL이 성공적으로 동작하게 되었다. ``amcl.launch`` 파일에서 어떻게 동작하는지 상세하게 알아보자. Hector SLAM을 실행할때와 같이 bag 파일에서 가져와서 play시키고 있으므로 ``/use_sim_time parameter`` 을 true로 설정한다. moore.yaml map을 publish하기 위해서 ``map_server`` node를 실행한다. 해당 line 이후에 Hecktor SLAM을 제공함으로서 동일한 ``base_link_to_laser`` 변환을 포함한다. 해당 line 이후에 launch 파일은 amcl node를 실행한다. 여기서 모든 수치적인 파라미터를 동일하게 유지하고 ``base_frame_id`` 만 수정하고 초기 pose x, y를 추가한다. A는 map frame에 상대적인 차량의 orientation이다. 각 parameter에 있는 정보에 대해서 `AMCL page <http://wiki.ros.org/amcl%E2%80%8B>`_ 에 있는 이러한 것들을 더 자세히 읽어보도록 하자.
 
-If your AMCL isn’t working, it’s a good idea to compare your rqt_graph and rqt_tf_tree to the ones we have included screenshots of below.
+만약에 AMCL이 동작하지 않는다면, rqt_graph 와 rqt_tf_tree 를 비교해 보면 좋다. 아래 화면 참고.
 
 .. figure:: img/amcl2.jpg
 
-This is what the ``rqt_tf_tree`` looks like. You can verify if yours looks like this too by running​ ``rosrun rqt_tf_tree rqt_tf_tree`` in another terminal window while AMCL is running.
+``rqt_tf_tree`` 으로 AMCL이 실행되는 동안 다른 터미널을 띄워서 ``rosrun rqt_tf_tree rqt_tf_tree`` 실행해서 어떻게 보이지는 확인할 수 있다.
 
 .. figure:: img/amcl3.jpg
 
-This is the rqt graph generated by running in a new terminal window ​``rosrun rqt_graph rqt_graph``.
+새로운 터미널에서 ​``rosrun rqt_graph rqt_graph`` 을 실행하면 이렇게 rqt graph가 생성된다.
 
 .. figure:: img/amcl4.jpg
 
-Now that we can localize the car in a map, what’s next? Well, we can do really cool things! We can set waypoints for the car to follow, and those waypoints can have information not just about location but also speed at each point on the track. The car can use some type of pure pursuit algorithm in order to traverse from waypoint to waypoint. These will all be covered in the next sections.
+이제 차량을 map에서 localize할 수 있다. 다음은 무엇을 해야할까? 정말 멋진 것을 할 수 있다. 차량이 follow하는 waypoint를 설정할 수 있고 이 waypoint들은 위치 정보 뿐만 아니라 track의 각 point에서 속도를 가질 수 있다. 차량은 waypoint간 이동을 위해서 순수하게 쫓아가는 알고리즘의 타입을 사용할 수도 있다. 이와 관련된 내용은 다음 장에서 다른다.
 
 Localization with Particle Filter (Faster and More Accurate than AMCL)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Why might you want to upgrade from AMCL to MIT particle filter? For one, AMCL only updates at around 4 times per second, whereas particle filter updates around 30 times per second. Additionally, particle filter uses the GPU whereas AMCL only uses the CPU. This results in the ability to use around 100x the number of particles, which results in more accuracy in localization. When we tried to use AMCL for localization with pure pursuit, we ran into challenges where we weren’t receiving any messages on the estimated pose topic because the car had not moved a certain threshold distance. When we set that threshold in AMCL parameters to be lower, the localization performance lagged. Hence we have been using the particle filter code written by Corey Walsh. The code follows this `publication <https://arxiv.org/abs/1705.01167>`_.
+AMCL에서 MIT particle filter로 업그레이드 해보자. AMCL는 초당 4번 가량만 업데이트 한다. 반면에 particle filter는 초당 30번 정도 업데이트 한다. 추가로 particle filter는 GPU를 사용하고 AMCL는 CPU만 사용한다. 결과적으로 100x particle을 사용할 수 있게 된다. 이로서 보다 정확하게 localization이 가능하다. 순수하게 쫓아가는 localization을 위해서 AMCL을 사용하는 경우에 특정 threshold distance를 움직이지 않기 때문에 estimated pose topic에 대한 어떤 메시지도 수신하지 않는다는 문제가 있다. AMCL 파라미터에서 이런 threshold를 낮게 설정하면 localization 성능은 떨어진다. 따라서 Corey Walsh가 작성한 particle filter 코드를 사용한다. 코드는 `publication <https://arxiv.org/abs/1705.01167>`_ 와 같다.
 
-Follow instructions `here <https://github.com/f1tenth/particle_filter>`_ to install ``RangeLibc`` and other dependencies for particle filter.
+``RangeLibc`` 를 설치하기 위해서 `here <https://github.com/f1tenth/particle_filter>`_ 지시를 따라서 해보자. particle filer를 위한 의존성이 있다.
 
-Once you have installed the dependencies, there is no need to install the source code because we have already included it inside of the ``/src/algorithms/particle_filter``. To see a demo of the particle filter in action, navigate to the terminal and type in the following launch command.
+일단 이런 의존성을 설치하면 소스 코드를 설치할 필요가 없다. 왜냐하면 이미 ``/src/algorithms/particle_filter`` 내부에 소스를 포함하고 있기 때문이다. particle filter의 데모를 보기 위해서 터미널로 이동해서 아래 launch 명령을 입력하자.
 
 .. code-block:: bash
 
 	$​ roslaunch localization particle_filter.launch
 
-You can expect to see something like this:
+아래와 같은 것을 기대할 수 있다.
 
 .. figure:: img/pf1.jpg
 	:align: center
 
-An Rviz window opens up with a map and particles (in red), indicating where the car is in the world. The ``particle_filter.launch`` file is playing back a rosbag, so you should see the car and particles moving around the map in a counter-clockwise fashion. In the ``article_filter.launch`` file we manually send a message to ``/initialpose`` topic but if you want to set it yourself in Rviz you can select the 2D Pose Estimate button on the top (4th button from the left) and click and drag in the map.
+Rviz 윈도우가 map과 particle과 함께 나타난다. world에서 차량이 있는 위치를 나타낸다. ``particle_filter.launch`` 파일은 rosbag을 play하고 반시계 방향으로 map 주위를 차량과 particle이 움직이는 것을 볼 수 있다. ``article_filter.launch`` 파일에서 수동으로 메시지를 ``/initialpose`` topic에 전달하지만 Rviz에서 직접 설정하기를 원하면 상단에 있는 2D Pose Estmate 버튼을 눌러서 지도 상에서 클릭 및 드래그하면 된다.
 
-If you wanted to try it out in the real world with a joystick to see the localization live, you can run the ``particle_filter_live.launch`` file like this:
+조이스틱으로 실제로 이를 해보고 싶다면 ``particle_filter_live.launch`` 파일을 실행한다.:
 
 .. code-block:: bash
 
 	$​ roslaunch localization particle_filter_live.launch
 
-The difference between ``particle_filter_live.launch`` and ``particle_filter.launch`` is ``particle_filter_live.launch`` doesn’t play a rosbag, doesn’t use simulated time, and instead includes the teleop.launch file. Everything else is the same.
+``particle_filter_live.launch`` 와 ``particle_filter.launch`` 의 차이점은 ``particle_filter_live.launch`` 는 rosbag를 실행하지 않고 time을 시뮬레이션하지 않고 대신에 teleop.launch 파일을 포함한다. 그 이외에는 모든 것이 동일하다.
 
-Now that you have the ``particle_filter.launc`` working, let’s examine the contents of the file more carefully. You will notice many overlaps between ``particle_filter.launch`` and ``amcl.launch`` and ``hector_slam.launch``. For instance, you will recognize the map server, the ``/use_sim_time`` parameter, the rosbag and the static transform between base_footprint to laser. Note that in ``particle_filter.launch`` we use the name ``base_footprin`` instead of ``base_link`` because particle filter calls it the ``base_footprint``. Then we load the ``particle_filter`` node with a few arguments. We tell ``particle_filter`` that our ``scan_topic`` is called ``/scan`` and that our odometry topic is called ``/vesc/odom``. We keep the ``max_particles`` of 4,000 at the default number. Below are screenshots of the ``rqt_tf_tree`` and ``rqt_graph``.
+``particle_filter.launc`` 가 동작하게 되었다. 파일의 내용을 좀더 자세히 살펴보자. ``particle_filter.launch`` 와 ``amcl.launch`` ,  ``hector_slam.launch`` 사이에 많은 공통점이 있따는 것을 알 수 있다. 예를 들자면 map server, ``/use_sim_time`` 파라미터, rosbag과 base_footprint와 laser 사이에 static transform을 알 수 있다. ``particle_filter.launch`` 파일에서 ``base_link`` 대신에 ``base_footprin`` 라는 이름을 사용한다. 왜냐하면 particle filter는 이를 ``base_footprint`` 라고 부르기 때문이다. 다음으로 ``particle_filter`` node를 몇 개 인자와 함께 실행한다. ``particle_filter`` 에게 ``scan_topic`` 는 ``/scan`` 으로 odometry topic은 ``/vesc/odom`` 라고 부르게 한다. 기본적으로 4,000 개의 ``max_particles`` 를 유지한다. 아래는 ``rqt_tf_tree`` 와 ``rqt_graph`` 화면이다.
 
-What if we want to run particle filter with a slower update rate? (In order to appreciate the speed that the GPU offers or to simulate on a slower computer). Inside the particle_filter.launch file, you can change the “range_method” from “rmgpu” to “bl”. As documented on the particle filter Github repo, “bl” does not use the GPU and has much less particles. Our testing shows that “bl” achieves an inferred_pose update rate of around 7Hz, whereas “rmgpu” achieves 40Hz.
+더 낮은 업데이트 속도로 particle filter를 실행한다면? (GPU가 제공하는 속도를 평가하기 위해서 아니면 더 느린 컴퓨터를 시뮬레이션하기 위해서) particle_filter.launch 파일 내부에서 “rmgpu”에서 “bl”로 “range_method”를 변경할 수 있다. particle filter Github repo에 문서로 “bl”은 GPU를 사용하지 않고 더 적은 particle를 가진다. 우리 테스팅에서는 “bl”은 대략 7Hz의 inferred_pose 업데이트 속도를 달성한 반면에 “rmgpu”는 40Hz를 달성했다.
 
 .. figure:: img/pf2.jpg
 	:align: center

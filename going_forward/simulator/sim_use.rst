@@ -3,35 +3,35 @@ Using the Simulator
 
 Driving
 -----------------
-Try controlling the racecar manually using your keyboard. Press ``K`` to give driving control to the keyboard, you should see the following in your terminal:
+키보드를 사용해서 racecar를 수동으로 운전하기. ``K`` 를 누르면 키보드 제어고 다음 터미널에서 다음을 따라할 수 있다.:
 
 
 .. figure:: img/sim_keyboard.png
   :align: center
 
-Then, drive using the standard WASD keys:
+다음으로 표준 WASD 키 사용해서 운전하기:
 
-	- ``W`` drives the car forward
-	- ``A`` steers to the left 
-	- ``S`` drives it backwards
-	- ``D`` steers to the right. 
+	- ``W`` 전진
+	- ``A`` 왼쪽으로 돌리기
+	- ``S`` 후진
+	- ``D`` 오른쪽으로 돌리기
 
-Press ``spacebar`` to bring the car to a stop. 
+``spacebar``는 차량을 멈추게 한다.
 
 .. note::
 
-	Be aware that if you crash, the keyboard will be turned off, and you’ll have to press ``K`` again to turn it back on. Also, it can only handle one key press at a time, so holding down multiple keys at once does not work. Lastly, pressing ``A`` or ``D`` will steer to a fixed angle, and the only way to straighten out is with ``spacebar``.
+	충돌하면 키보드는 꺼지므로 ``K`` 를 다시 눌러서 돌려놔야 한다. 한 번에 하나의 키만 처리할 수 있어서 동시에 여러 키를 누르면 동작하지 않는다. 마지막으로 ``A`` 나 ``D`` 를 누르면 고정 각으로 조향되며 직진하는 유일한 방법은 ``spacebar`` 를 누르는 것이다.
 
-The controls are a bit tricky, but hopefully you won't have to do too much manual driving!
+조정은 약간 꼼수가 있긴 하지만 수동 운전을 많이 하지 않기를 바란다.
 
-If you are using a joystick, make sure the correct axis is set in params.yaml for steering and acceleration- this changes between different joysticks.
+조이스틱을 사용하면, 조향과 가속을 위해서 params.yaml에 축이 제대로 설정되어 있어야 한다. 조이스틱마다 이 값이 바뀐다.
 
 .. figure:: img/sim_keyboard2.gif
 	:align: center
 
 Instant Pose Setting
 -----------------------
-A useful function of the simulator is that you can instantly move the car without driving it to its new location. To do this, click the ``2D Pose Estimate`` pose button at the top of the rViz window, and then click the desired location on the track to move the car there.
+시뮬레이터의 가장 유용하 기능 중에 하나는 새로운 위치로 바로 순간 이동 시킬 수 있다는 것이다. 이렇게 하기 위해서 rViz 창의 상단에 ``2D Pose Estimate`` pose 버튼을 누르고 다음으로 차량을 이동시키기 위해서 트랙상에 있는 원하는 위치를 클릭한다.
 
 .. figure:: img/sim_pose.gif
   :align: center

@@ -1,35 +1,35 @@
 Linux/ROS Installation
 ============================
 
-ROS only runs natively in Linux so we are only supporting using the simulator in Ubuntu at this time. If you do not have ROS Melodic installed, follow the instructions from `<http://wiki.ros.org/melodic/Installation/Ubuntu>`_. 
+ROS는 Linux에서만 실행된다. Ubuntu에서 시뮬ㄹ이터를 사용하는 것을 지원한다. 만약에 ROS Melodic 설치된 것이 없으면 `<http://wiki.ros.org/melodic/Installation/Ubuntu>`_ 을 참고하자.
 
-Dependencies
+의존성
 ------------------
-You will need the following dependences:
+다음과 같은 의존성이 필요하다.:
   
   - tf2_geometry_msgs
   - ackermann_msgs
   - joy
   - map_server
 
-Install them using
+다음을 이용해서 설치하기
 
 .. code-block:: bash
   
   sudo apt-get install ros-melodic-tf2-geometry-msgs ros-melodic-ackermann-msgs ros-melodic-joy ros-melodic-map-server
 
-The full list of dependencies can be found in the ``package.xml`` file.
+``package.xml`` 파일에서 의존성 전체 목록을 확인할 수 있다.
 
 Package
 ------------
-To install the simulator package, clone the simulator repository into your catkin workspace:
+simulator 패키지를 설치하기 위해서 simulator 저장소를 catkin workspace에 clone한다:
 
 .. code-block:: bash
 
   cd ~/catkin_ws/src
   git clone https://github.com/f1tenth/f1tenth_simulator.git
 
-Then run catkin_make to build it:
+다음으로 catkin_make로 빌드하자:
 
 .. code-block:: bash
 
@@ -39,16 +39,16 @@ Then run catkin_make to build it:
 
 Quick Start
 ---------------
-To run the simulator on its own, run:
+simulator를 실행하기 위해서 다음을 실행:
 
 .. code-block:: bash
 
   roslaunch f1tenth_simulator simulator.launch
 
-This will launch everything you need for a full simulation: roscore, the simulator, a preselected map, a model of the racecar, and the joystick server.
+전체 simulator에 필요한 모든 것을 launch한다.: roscore, the simulator, a preselected map, a model of the racecar, the joystick server
 
 .. figure:: img/sim_install.png
   :align: center
 
-  Full simulation launched.
+  전체 simulation launched.
 
