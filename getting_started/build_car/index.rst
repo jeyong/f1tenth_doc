@@ -1,10 +1,10 @@
 .. _doc_build_car:
 
-Building the F1TENTH Car
+F1TENTH Car 만들기
 =====================
-In this build guidelines we are focusing on the hardware setup of our F1TENTH vehicle based on the `Traxxas Slash 4x4 Premium <https://traxxas.com/products/models/electric/6804Rslash4x4platinum>`_ Chassis and the `NVIDIA Jetson Xavier NX <https://developer.nvidia.com/embedded/jetson-xavier-nx-devkit>`_. At the end of this build guidelines, you will have a fully functioning F1TENTH Autonomous Vehicle.
+만들기 가이드라인에서는 차량의 하드웨어 설정에 집중한다. 차량은 `Traxxas Slash 4x4 Premium <https://traxxas.com/products/models/electric/6804Rslash4x4platinum>`_ 이고 탑재 컴퓨터는 `NVIDIA Jetson Xavier NX <https://developer.nvidia.com/embedded/jetson-xavier-nx-devkit>` 이다. 마지막에는 모든 기능이 동작하는 차량이 완성되게 된다.
 
-There are three main sections to the car.
+차량에 대한 3개 주요 섹션 :
 
 .. image:: img/build_outline_NX.JPG
 
@@ -12,30 +12,30 @@ There are three main sections to the car.
 | [2] will be referred to as the **Autonomy Elements**
 | [3] will be referred to as the **Upper Level Chassis**
 
-#. First, we start off by setting up the :ref:`Lower Level Chassis <doc_build_lower_level>` , which serves as the foundation of the vehicle.
-#. Then, we put together all of the :ref:`Autonomy Elements <doc_build_autonomy_elements>`.
-#. Next, all of the Autonomy Elements will be mounted on the :ref:`Upper Level Chassis <doc_build_upper_level>`.
-#. Finally, the Upper Level Chassis will be :ref:`connected <doc_build_all_together>` with the Lower Level Chassis.
+#. 먼저, :ref:`Lower Level Chassis <doc_build_lower_level>`에서 시작한다. 차량의 기반이 되는 부분이다.
+#. 다음으로 모든 :ref:`Autonomy Elements <doc_build_autonomy_elements>` 를 합친다.
+#. 다음은 :ref:`Upper Level Chassis <doc_build_upper_level>` 에 장착한다.
+#. 마지막으로 Upper Level Chassis를 Lower Level Chassis와 :ref:`connected <doc_build_all_together>` 한다.
 
 .. danger::
-	**LIPO (LITHIUM POLYMER) BATTERY SAFETY WARNING**
+	**LIPO (LITHIUM POLYMER) 배터리 안전 관련**
 
-	The F1TENTH Autonomous Vehicle uses lithium polymer batteries. LiPO batteries allow your car to run for a long time, but they are not something to play with or joke about. They store a large amount of energy in a small space and can damage your car and cause a fire if used improperly. With this in mind, here are some safety tips for using them with the car.
+	차량은 LIPO 배터리를 사용한다. LiPO 배터리를 사용하면 오랜 시간동안 운행이 가능하다. 하지만 주의가 필요하다. 작은 사이즈에 많은 에너지를 지니고 있고 차량을 손상시키거나 불이 날 수 있다. 아래와 같은 안전에 관련된 내용을 숙지하도록 하자.
 
-	* When charging batteries, always monitor them and place them in a fireproof bag on a non-flammable surface clear of any other objects.
-	* Do not leave a LIPO battery connected to the car when you’re not using it. The battery will discharge and its voltage will drop to a level too low to charge it safely again.
-	* Unplug the battery from the car immediately if you notice any popping sounds, bloating of the battery, burning smell, or smoke.
-	* Never short the battery leads.
-	* Do not plug the battery in backwards. This will damage the VESC and power board (and likely the Jetson as well) and could cause a short circuit.
-	* See ​this `video <https://www.youtube.com/watch?v=gz3hCqjk4yc>`_ for an example of what might happen if you don’t take care of your batteries. Be safe and don’t let these happen to you!
+	* 충전하는 동안 항상 지켜보고 방염 가방에 두도록 한다.
+	* 사용하지 않는 경우 LIPO 배터리를 차량에 연결된 상태로 방치하지 않는다. 배터리는 방전되어 전압이 너무 떨어지면 충전이 불가능하게 된다.
+	* 배터리에서 펑하는 소리, 냄새, 연기 등이 나면 바로 차량과의 연결을 해제한다.
+	* 쇼트나게 하지 마라~
+	* 배터리를 반대로 연결하지 않도록 주의한다. VESC와 power board가 쇼트가 날 수 있다.
+	* 배터리를 부주의하게 다르면 발생하는 일에 대해서 `video <https://www.youtube.com/watch?v=gz3hCqjk4yc>`_ 를 참고하자.
 
-**Difficulty Level:** Intermediate
+**난이도:** 중급
 
-**Approximate Time Investment:** 1.5 hours
+**소요시간:** 1.5 hours
 
 
 .. note::
-  If you have any build and/or setup questions, post to the `forum <http://f1tenth.org/forum.html>`_.
+  만들거나 설정에 관한 질문은 `forum <http://f1tenth.org/forum.html>`_ 를 참고하자.
 
 .. toctree::
    :maxdepth: 1

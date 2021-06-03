@@ -1,15 +1,15 @@
 
 .. _doc_BOM:
 
-Bill of Materials
+재료비
 ------------------------
 `Master BOM <https://docs.google.com/spreadsheets/d/1ykUyrZq-vLlMTf0TIcdMrRbGKcRWglW6ol76QyGst2I/edit#gid=2038095912>`_
 
 .. note::
-  You have different possibilities for creating your F1TENTH car. We are focusing on a hardware setup that is based on the  `Traxxas Slash 4x4 Premium <https://traxxas.com/products/models/electric/6804Rslash4x4platinum>`_ Chassis and the `NVIDIA Jetson Xavier NX <https://developer.nvidia.com/embedded/jetson-xavier-nx-devkit>`_. The hardware setup based on the NVIDIA Jetson TX2 and Traxxas Ford Focus chassis is deprecated.
+  다른 부품으로도 차량을 만들 수 있다. 하드웨어는 `Traxxas Slash 4x4 Premium <https://traxxas.com/products/models/electric/6804Rslash4x4platinum>`_ Chassis 와 `NVIDIA Jetson Xavier NX <https://developer.nvidia.com/embedded/jetson-xavier-nx-devkit>`_ 를 기반으로 한다. 하드웨어 설정은 NVIDIA Jetson TX2와 Traxxas Ford Focus chassis는 더이상 지원하지 않는다.
 
 .. tip::
-	The `Platform Deck <https://drive.google.com/drive/folders/1m6JuSgbCYWefAvTAbb9SPebGBG61cLQo?usp=sharing>`_ needs to be laser cut. If you laser cutting machines are unavailable at your institution, `Ponoko <https://www.ponoko.com/>`_ is a good place to upload the .dxf file and they will cut and ship it to you.
+	`Platform Deck <https://drive.google.com/drive/folders/1m6JuSgbCYWefAvTAbb9SPebGBG61cLQo?usp=sharing>`_ 은 레이저 커터가 필요하다. 레이터 커터가 없으면 `Ponoko <https://www.ponoko.com/>`_ 에 .dxf 파일을 업로드하면 잘라서 보내준다.
 
 
 .. (scroll to the right to see links)
