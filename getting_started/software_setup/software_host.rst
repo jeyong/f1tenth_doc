@@ -1,41 +1,37 @@
 .. _doc_software_host:
 
-1. Pit/Host Setup
+1. Pit/Host 설정
 ==================
 **Equipment Used:**
 	* Laptop/Computer
 
-**Approximate Time Investment:** 1-2 hours
+**소요시간:** 1-2 hours
 
-Overview
+개요
 ----------
-
-The F1TENTH vehicle runs on a Linux operating system. You will need to have Linux and ROS (Robot Operating System) on your **Pit** laptop. This Laptop is used as your main developer environment as well as a debug support. We will assume that you already have some basic knowledge of Linux and ROS as explaining either systems in depth is beyond the scope of this documentation. If you are not familiar with Linux we can recommend you the following links:
+차량에는 리눅스를 운영한다. **Pit** 노트북에 Linux와 ROS를 설치한다. 노트북은 디버깅 지원 및 개발 환경으로 사용한다. 이미 Linux와 ROS에 대한 지식이 있다고 가정한다. 만약 Linux나 ROS에 익숙하지 않다면 다음을 참고한다 :
 
 	* `Introduction to Linux Operating System (OS) <https://www.guru99.com/introduction-linux.html>`_
 	* `The Linux Command Line for beginners <https://ubuntu.com/tutorials/command-line-for-beginners#1-overview>`_
 
-.. important:: We currently support **Ubuntu Xenial 16.04/ROS Kinetic** and **Bionic 18.04/ROS Melodic**.
+.. important:: 지원 환경 **Bionic 18.04/ROS Melodic**.
 
-We will refer to the **Pit** computer as **Pit** or **Host** computer/laptop interchangeably.
+**Pit** 컴퓨터는 Host 컴퓨터나 노트북과 동일한 의미로 사용한다.
 
-In this **Configure F1TENTH System** section, the **Pit** laptop is first used to flash the NVIDIA JetPack Software onto the **NVIDIA Jetson NX**. Afterwards we use the laptop to SSH into the **NVIDIA Jetson NX**.
+**Configure F1TENTH System** 섹션에서 Host 컴퓨터로 NVIDIA JetPack 소프트웨어를 **NVIDIA Jetson NX**에 flash시킨다. Host 컴퓨터에서 SSH로 **NVIDIA Jetson NX**에 접근한다.
 
-1. Installing Ubuntu
+1. Ubuntu 설치
 ---------------------
-If you do not already have Linux running natively on your laptop, we suggestion you dual boot or install Ubuntu on an external hard drive. You can download the Ubuntu image `here <https://ubuntu.com/download/desktop>`_. Instructions for installing Ubuntu can be found `here <https://ubuntu.com/tutorials/tutorial-install-ubuntu-desktop#1-overview>`_.
+노트북에 Linux가 깔려있지 않는 경우, 외부 하드 드라이브에 Ubuntu를 설치해서 듀얼부팅을 하는 것을 추천한다. `here <https://ubuntu.com/download/desktop>`_ 에서 Ubuntu image를 다운받고  `here <https://ubuntu.com/tutorials/tutorial-install-ubuntu-desktop#1-overview>`_ 에서 설치방법을 따른다.
 
-If you use a Virtual Machine (VM) for your Mac or Windows Laptop instead, see :ref:`Appendix A <doc_appendix_a>` on sharing folders.
+Mac이나 Windows에서는 VM(Virtual Machine)을 사용가능 하며 :ref:`Appendix A <doc_appendix_a>` 를 참고하자.
 
-Installing Ubuntu may take a while so you may want to get a cup of coffee or tea and settle in.
+Ubuntu 설치하는데 시간이 좀 걸릴 수 있다.
 
-2. Installing ROS
+2. ROS 설치하기
 ------------------
-Afterwards we are installing ROS on your Host Laptop. You can follow the instructions `here <https://wiki.ros.org/ROS/Installation>`_ to install the supported ROS versions Kinetic or Melodic displayed above for your Ubuntu System. We can recommend to install the **-desktop-full** version so you have everything you need on your Host Laptop.
+`here <https://wiki.ros.org/ROS/Installation>`_ 를 참고하여 설치하자.
 
-If you have never used ROS before, ROS has many in-depth and useful tutorials which can be found here. `here <https://wiki.ros.org/ROS/Tutorials>`_ that you may want to try after installing.
-
-With a Linux operating system on the **Pit/Host** computer, you're ready to move on to setting up the **NVIDIA Jetson NX** on your F1TENTH car.
 
 .. image:: img/host/host01.gif
 	:align: center
